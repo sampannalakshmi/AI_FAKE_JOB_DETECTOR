@@ -1,0 +1,391 @@
+{
+  "total": 64,
+  "passed": 63,
+  "failed": 1,
+  "tests": [
+    {
+      "area": "Frontend",
+      "name": "Frontend HTTP server serves preview.html (200 OK)",
+      "status": "PASS",
+      "detail": "Status: 200"
+    },
+    {
+      "area": "Frontend",
+      "name": "React 18 & ReactDOM loaded via CDN",
+      "status": "PASS",
+      "detail": "React CDN scripts present"
+    },
+    {
+      "area": "Frontend",
+      "name": "Tailwind CSS loaded via CDN",
+      "status": "PASS",
+      "detail": "Tailwind CDN script present"
+    },
+    {
+      "area": "Frontend",
+      "name": "Scanner tab navigation present",
+      "status": "PASS",
+      "detail": "Scanner tab state logic found"
+    },
+    {
+      "area": "Frontend",
+      "name": "History tab navigation present",
+      "status": "PASS",
+      "detail": "History tab state logic found"
+    },
+    {
+      "area": "Frontend",
+      "name": "Scam Tactics tab navigation present",
+      "status": "PASS",
+      "detail": "Tactics tab state logic found"
+    },
+    {
+      "area": "Frontend",
+      "name": "Job input form fields (title, company, contact, channel, salary, description)",
+      "status": "PASS",
+      "detail": "All 6 form state fields present"
+    },
+    {
+      "area": "Frontend",
+      "name": "Sample Job buttons present (High, Medium, Low risk samples)",
+      "status": "PASS",
+      "detail": "Sample IDs sample-high-risk, sample-medium-risk, sample-low-risk found in HTML"
+    },
+    {
+      "area": "Backend",
+      "name": "/api/health endpoint returns 200 OK",
+      "status": "PASS",
+      "detail": "Status: 200"
+    },
+    {
+      "area": "Backend",
+      "name": "Health reports healthy status & app version",
+      "status": "PASS",
+      "detail": "Status: healthy, Version: 1.0.0"
+    },
+    {
+      "area": "Backend",
+      "name": "Health reports gemini_configured: True",
+      "status": "PASS",
+      "detail": "gemini_configured = True"
+    },
+    {
+      "area": "Backend",
+      "name": "CORS configured for frontend (http://localhost:3000)",
+      "status": "PASS",
+      "detail": "Access-Control-Allow-Origin: http://localhost:3000"
+    },
+    {
+      "area": "Backend",
+      "name": "Unknown routes return standard 404 Not Found",
+      "status": "PASS",
+      "detail": "Status: 404"
+    },
+    {
+      "area": "Backend",
+      "name": "/api/config/key endpoint exists in backend router",
+      "status": "PASS",
+      "detail": "Route configured in main.py"
+    },
+    {
+      "area": "Gemini",
+      "name": "backend/.env exists with valid non-empty GEMINI_API_KEY",
+      "status": "PASS",
+      "detail": "Key present (53 chars)"
+    },
+    {
+      "area": "Gemini",
+      "name": "backend/.env.example exists with placeholder template",
+      "status": "PASS",
+      "detail": "backend/.env.example exists"
+    },
+    {
+      "area": "Gemini",
+      "name": "backend/.gitignore prevents committing .env files",
+      "status": "PASS",
+      "detail": ".env in backend/.gitignore"
+    },
+    {
+      "area": "Gemini",
+      "name": "Root .gitignore prevents committing .env files",
+      "status": "PASS",
+      "detail": ".env in root .gitignore"
+    },
+    {
+      "area": "Gemini",
+      "name": "Uses official Google Gen AI SDK (from google import genai)",
+      "status": "PASS",
+      "detail": "Official SDK imported"
+    },
+    {
+      "area": "Gemini",
+      "name": "Implements robust multi-model fallback chain",
+      "status": "PASS",
+      "detail": "Fallback chain present"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "POST /api/analyze returns 200 OK with live Gemini response",
+      "status": "PASS",
+      "detail": "Status: 200"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Response contains valid report ID (rep_...)",
+      "status": "PASS",
+      "detail": "id: rep_7e5fda10fc"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Response contains numerical fraudScore (0-100)",
+      "status": "PASS",
+      "detail": "fraudScore: 95"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Response contains riskCategory (LOW, MEDIUM, HIGH)",
+      "status": "PASS",
+      "detail": "riskCategory: HIGH"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Response contains structured reasons list",
+      "status": "PASS",
+      "detail": "5 reasons returned"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Response contains safetyRecommendations list",
+      "status": "PASS",
+      "detail": "4 recommendations returned"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Engine mode confirms active Gemini model",
+      "status": "PASS",
+      "detail": "engineMode: Google Gemini AI (gemini-3.5-flash)"
+    },
+    {
+      "area": "AI Analysis",
+      "name": "Backend status is CONNECTED",
+      "status": "PASS",
+      "detail": "aiBackendStatus: CONNECTED"
+    },
+    {
+      "area": "Score Accuracy",
+      "name": "Legitimate Stripe job receives LOW risk score (<= 20)",
+      "status": "PASS",
+      "detail": "Stripe score = 2/100, category = LOW"
+    },
+    {
+      "area": "Score Accuracy",
+      "name": "Fraudulent registration fee job receives HIGH risk score (>= 75)",
+      "status": "PASS",
+      "detail": "Scam score = 95/100, category = HIGH"
+    },
+    {
+      "area": "Detection",
+      "name": "Genuine job classified as LOW risk category",
+      "status": "PASS",
+      "detail": "Legit category: LOW"
+    },
+    {
+      "area": "Detection",
+      "name": "Fraudulent job classified as HIGH risk category",
+      "status": "PASS",
+      "detail": "Scam category: HIGH"
+    },
+    {
+      "area": "Detection",
+      "name": "Clear differentiation between genuine and fraud (delta >= 60 pts)",
+      "status": "PASS",
+      "detail": "Delta: 93 points (Scam: 95, Genuine: 2)"
+    },
+    {
+      "area": "Phrases",
+      "name": "Suspicious phrases extracted from fraudulent posting",
+      "status": "PASS",
+      "detail": "5 phrases extracted"
+    },
+    {
+      "area": "Phrases",
+      "name": "Identified advance fee / security deposit red flag quote",
+      "status": "PASS",
+      "detail": "Captured in quotes: ['mandatory refundable registration and security deposit of Rs 2,500', 'No prior experience or interview needed']"
+    },
+    {
+      "area": "Phrases",
+      "name": "Identified urgency, informal chat, or zero-experience hook",
+      "status": "PASS",
+      "detail": "Captured in quotes: ['Connect with HR on WhatsApp immediately to complete payment', 'submit a scanned copy of your PAN, Aadhaar card, and bank account details for salary registration']"
+    },
+    {
+      "area": "History",
+      "name": "LocalStorage key defined ('ai_fake_job_detector_history')",
+      "status": "PASS",
+      "detail": "Found in preview.html"
+    },
+    {
+      "area": "History",
+      "name": "saveHistory() function stores up to 50 reports in state & localStorage",
+      "status": "PASS",
+      "detail": "saveHistory logic confirmed"
+    },
+    {
+      "area": "History",
+      "name": "useEffect loads scan history on initial application mount",
+      "status": "PASS",
+      "detail": "Auto-load on mount confirmed"
+    },
+    {
+      "area": "History",
+      "name": "deleteHistoryItem() deletes individual scans by id",
+      "status": "PASS",
+      "detail": "Individual deletion confirmed"
+    },
+    {
+      "area": "History",
+      "name": "clearAllHistory() wipes all saved scans with confirmation",
+      "status": "PASS",
+      "detail": "Clear all history confirmed"
+    },
+    {
+      "area": "History",
+      "name": "History view renders saved scans and empty state",
+      "status": "PASS",
+      "detail": "History UI rendering confirmed"
+    },
+    {
+      "area": "Buttons",
+      "name": "Save Report button with click handler calling saveHistory",
+      "status": "PASS",
+      "detail": "Save action wired"
+    },
+    {
+      "area": "Buttons",
+      "name": "isSaved visual state indicator ('Saved to History' checkmark)",
+      "status": "PASS",
+      "detail": "Saved visual state confirmed"
+    },
+    {
+      "area": "Buttons",
+      "name": "Copy Report button with clipboard API copy action",
+      "status": "PASS",
+      "detail": "navigator.clipboard.writeText implementation found"
+    },
+    {
+      "area": "Buttons",
+      "name": "copied visual feedback state ('Copied!' indicator)",
+      "status": "PASS",
+      "detail": "Copied state timeout confirmed"
+    },
+    {
+      "area": "UX",
+      "name": "isAnalyzing loading state with animated spinner",
+      "status": "PASS",
+      "detail": "Analyzing spinner found"
+    },
+    {
+      "area": "UX",
+      "name": "Dynamic loading stage messages (Connecting -> Transmitting -> Parsing)",
+      "status": "FAIL",
+      "detail": "Multi-stage loading status messages found"
+    },
+    {
+      "area": "UX",
+      "name": "FastAPI backend status indicator (connected / offline / missing_key)",
+      "status": "PASS",
+      "detail": "Live status pill found"
+    },
+    {
+      "area": "UX",
+      "name": "Manual backend Recheck button with visual feedback",
+      "status": "PASS",
+      "detail": "Recheck button with spinner confirmed"
+    },
+    {
+      "area": "UX",
+      "name": "Offline fallback handler (handleRunHeuristicFallback)",
+      "status": "PASS",
+      "detail": "Offline heuristic fallback button present"
+    },
+    {
+      "area": "UX",
+      "name": "Pydantic backend input validation returns 422 for malformed body",
+      "status": "PASS",
+      "detail": "FastAPI returns 422 Unprocessable Entity"
+    },
+    {
+      "area": "Security",
+      "name": "Actual Gemini API key secret value is NOT present in any frontend code",
+      "status": "PASS",
+      "detail": "Leaks found: None (0 leaks)"
+    },
+    {
+      "area": "Security",
+      "name": "backend/.env is strictly excluded in backend/.gitignore",
+      "status": "PASS",
+      "detail": "backend/.gitignore contains .env"
+    },
+    {
+      "area": "Security",
+      "name": "Root .gitignore excludes .env files across the repository",
+      "status": "PASS",
+      "detail": "root .gitignore contains .env"
+    },
+    {
+      "area": "Security",
+      "name": "Frontend uses relative/local backend endpoints (never calls Gemini API directly)",
+      "status": "PASS",
+      "detail": "Frontend never directly invokes Google API"
+    },
+    {
+      "area": "Features",
+      "name": "Scanner view with job input form and sample loaders",
+      "status": "PASS",
+      "detail": "Scanner interface complete"
+    },
+    {
+      "area": "Features",
+      "name": "Scan History view with table, badges, and delete action",
+      "status": "PASS",
+      "detail": "History interface complete"
+    },
+    {
+      "area": "Features",
+      "name": "Common Scam Tactics tab with educational threat vectors",
+      "status": "PASS",
+      "detail": "Tactics library complete"
+    },
+    {
+      "area": "Features",
+      "name": "How It Works section explains 3-step threat analysis",
+      "status": "PASS",
+      "detail": "How It Works 3-step section present"
+    },
+    {
+      "area": "Features",
+      "name": "Security Tips modal with defensive checklist",
+      "status": "PASS",
+      "detail": "Security Tips modal present"
+    },
+    {
+      "area": "Features",
+      "name": "Disclaimer banner with cybersecurity probabilistic warning",
+      "status": "PASS",
+      "detail": "Disclaimer banner present"
+    },
+    {
+      "area": "Features",
+      "name": "Footer with copyright and cyber intelligence label",
+      "status": "PASS",
+      "detail": "Footer present"
+    },
+    {
+      "area": "Features",
+      "name": "One-click start scripts available (start-preview.bat, backend/start-backend.bat)",
+      "status": "PASS",
+      "detail": "Both start scripts present"
+    }
+  ]
+}
