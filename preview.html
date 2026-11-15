@@ -406,8 +406,6 @@ Stripe does not charge any application or equipment fees. All official communica
       const [loadingStage, setLoadingStage] = useState('');
       const [isRechecking, setIsRechecking] = useState(false);
       const [recheckMessage, setRecheckMessage] = useState('');
-      const [apiKeyInput, setApiKeyInput] = useState('');
-      const [isSavingKey, setIsSavingKey] = useState(false);
 
       // Dynamic backend URL for local & production (Render, Vercel)
       const getDefaultApiUrl = () => {
@@ -480,39 +478,6 @@ Stripe does not charge any application or equipment fees. All official communica
           }
         } finally {
           if (isManual) setIsRechecking(false);
-        }
-      };
-
-      const handleSaveApiKey = async (e) => {
-        e.preventDefault();
-        const key = apiKeyInput.trim();
-        if (!key || key.length < 10) {
-          alert('Please enter a valid Gemini API key (at least 15 characters, typically starts with AIzaSy or AQ).');
-          return;
-        }
-
-        setIsSavingKey(true);
-        try {
-          const res = await fetch(`${apiBaseUrl}/api/config/key`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ key }),
-          });
-
-          if (res.ok) {
-            setBackendStatus('connected');
-            setBackendError(null);
-            setApiKeyInput('');
-            setRecheckMessage('✅ Gemini API key successfully saved and verified! You can now analyze jobs with live AI.');
-            setTimeout(() => setRecheckMessage(''), 6000);
-          } else {
-            const err = await res.json().catch(() => ({}));
-            alert('Failed to save key: ' + (err.detail || 'Unknown server error'));
-          }
-        } catch (err) {
-          alert(`Failed to connect to backend server at ${apiBaseUrl}`);
-        } finally {
-          setIsSavingKey(false);
         }
       };
 
@@ -827,31 +792,15 @@ Stripe does not charge any application or equipment fees. All official communica
                           <h4 className="font-bold text-sm text-white">{backendError.title}</h4>
                           <p className="text-xs leading-relaxed text-slate-200">{backendError.message}</p>
                           
-                          {/* Option A: Paste key directly into the browser */}
+                          {/* Secure Environment Variable Notice */}
                           {backendError.type === 'KEY_MISSING' && (
-                            <div className="p-3 rounded-lg bg-slate-900/95 border border-slate-700/80 space-y-2 mt-2">
-                              <label className="block text-xs font-semibold text-cyan-300">
-                                🔑 Enter your Gemini API Key directly:
-                              </label>
-                              <div className="flex flex-col sm:flex-row gap-2">
-                                <input
-                                  type="password"
-                                  value={apiKeyInput}
-                                  onChange={(e) => setApiKeyInput(e.target.value)}
-                                  placeholder="AIzaSy..."
-                                  className="flex-1 px-3 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-600 focus:border-cyan-500 outline-none font-mono"
-                                />
-                                <button
-                                  type="button"
-                                  onClick={handleSaveApiKey}
-                                  disabled={isSavingKey || !apiKeyInput.trim()}
-                                  className="px-4 py-1.5 rounded bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 text-xs font-bold uppercase tracking-wider disabled:opacity-50 cursor-pointer"
-                                >
-                                  {isSavingKey ? 'Saving...' : 'Save & Connect'}
-                                </button>
+                            <div className="p-3 rounded-lg bg-slate-900/95 border border-slate-700/80 space-y-1.5 mt-2">
+                              <div className="flex items-center gap-2 text-xs font-semibold text-cyan-300">
+                                <span>🔒</span>
+                                <span>Secure Environment Variable Required</span>
                               </div>
-                              <p className="text-[11px] text-slate-400">
-                                Saved securely to <code className="text-cyan-300 font-mono">backend/.env</code> on your local machine. Never shared.
+                              <p className="text-[11px] text-slate-300 leading-relaxed">
+                                For security, the Gemini API key must be configured in your hosting provider's environment variables (<code className="text-cyan-300 font-mono">GEMINI_API_KEY</code> on Render) or in your local <code className="text-cyan-300 font-mono">backend/.env</code> file. Public API key entry via the browser is disabled in production.
                               </p>
                             </div>
                           )}

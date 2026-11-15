@@ -3,11 +3,7 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.config import settings, save_gemini_key_to_env
-from pydantic import BaseModel
-
-class ApiKeyPayload(BaseModel):
-    key: str
+from app.config import settings
 
 from app.models.schemas import (
     JobAnalysisRequest,
@@ -77,22 +73,6 @@ def health_check():
         model=settings.GEMINI_MODEL,
         message=msg,
     )
-
-@app.post("/api/config/key", tags=["Config"])
-def set_api_key(payload: ApiKeyPayload):
-    """
-    Saves a Gemini API key to backend/.env and reloads it dynamically.
-    """
-    cleaned = payload.key.strip()
-    if not cleaned or len(cleaned) < 10:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid Gemini API key. Keys from Google AI Studio typically start with 'AIzaSy' and are at least 30 characters long."
-        )
-    success = save_gemini_key_to_env(cleaned)
-    if not success:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to write key to backend/.env")
-    return {"status": "success", "message": "API key successfully saved to backend/.env and activated!", "gemini_configured": True}
 
 @app.post(
     "/api/analyze",
